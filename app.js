@@ -1,7 +1,11 @@
 
-var pages = ["home", "register", "oversikt"];
+var pages = ["home", "register", "overview"];
 var storageTypes = ["Stor", "Liten", "Annet"];
 var customers = [];
+customers.push({name:"testmann", tlf:"909090", email:"testmail@test.no",
+date:"date", storageType:"small"});
+customers.push({name:"guro", tlf:"kosevenn", email:"vakreste@vannlilje.no",
+date:"date", storageType:"big"});
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
   this.tlf = tlf;
@@ -15,8 +19,9 @@ window.onload = pageLoaded;
 function pageLoaded() {
   //show homepage
   getId("homePage").style.visibility = "visible";
-  //create lists:
+  //create html-stuff:
   makeList(storageTypes, "storageTypeInn");
+  updateOverview();
 
   //listeners
     for(i in pages){
@@ -24,6 +29,8 @@ function pageLoaded() {
     }
     //registerPage
     getId("registerCustomerBtn").onclick = registerCustomer;
+    //overviewPage
+    getId("searchBtn").onclick = searchFun;
 }
 function registerCustomer() {
   var registerInputs = getClass("registerInputs");
@@ -55,8 +62,59 @@ function registerCustomer() {
   console.log(nameInn+tlfInn+emailInn+accountInn+dateInn+storageTypeInn);
   //adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
-  customers.push(addedCustomer);  
+  customers.push(addedCustomer);
+  updateOverview();
+}
+function searchFun(evt) {
+  var searchTerm = getId("searchInn").value;
+  for(i in customers){
+    //if searchterm matches the first letters in current customer
+    if(searchTerm.toLowerCase() === customers[i].name.toLowerCase()){
+      console.log(customers[i]);
+    }
+  }
+}
+function updateOverview() {
+  getId("overviewTableDiv").innerHTML = "";
+  for(i in customers){//creating new <td> elements
+    //need new <td>-tags for each "datapoint", ie. .name
+    //adding info for one table row/customer
+    var nameTd = document.createElement("td");
+    var tlfTd = document.createElement("td");
+    var emailTd = document.createElement("td");
+    var accountNumberTd = document.createElement("td");
+    var dateTd = document.createElement("td");
+    var storageTypeTd = document.createElement("td");
+    nameTd.innerHTML = customers[i].name;
+    tlfTd.innerHTML = customers[i].tlf;
+    emailTd.innerHTML = customers[i].email;
+    accountNumberTd.innerHTML = customers[i].accountNumber;
+    dateTd.innerHTML = customers[i].date;
+    storageTypeTd.innerHTML = customers[i].storageType;
+    nameTd.id = customers[i].name;
+    tlfTd.id = customers[i].tlf;
+    emailTd.id = customers[i].email;
+    accountNumberTd.id = customers[i].accountNumber;
+    dateTd.id = customers[i].date;
+    storageTypeTd.id = customers[i].storageType;
 
+    //Wrap customer up in one tr + appending of all td's
+    var newTr = document.createElement("tr");
+    newTr.appendChild(nameTd);
+    newTr.appendChild(tlfTd);
+    newTr.appendChild(emailTd);
+    newTr.appendChild(accountNumberTd);
+    newTr.appendChild(dateTd);
+    newTr.appendChild(storageTypeTd);
+
+    //table to add everything into + appending
+    var newTable = document.createElement("table");
+    newTable.appendChild(newTr);
+
+    //appending to div in document (finally!)
+    getId("overviewTableDiv").appendChild(newTable);
+
+  }
 }
 function showPage(evt) {
   hidePages();
