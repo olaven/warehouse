@@ -1,0 +1,51 @@
+body{
+  font-size: 2em;
+  font-family:sans-serif;
+  background-color: rgb(91, 198, 222);
+  color: rgb(205, 72, 72);
+}
+.pages{
+  visibility: hidden;
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  margin-left: 2.5%;
+
+  border-left-style: solid;
+  border-left-color: rgb(205, 72, 72);
+  border-left-width: 0.2em;
+  border-right-style: solid;
+  border-right-color: rgb(205, 72, 72);
+  border-right-width: 0.2em;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(205, 72, 72);
+  border-bottom-width: 0.6em;
+}
+.placedCenter{
+  text-align: center;
+}
+.headers{
+  text-decoration: underline;
+}
+input, select{
+  border: none;
+  background-color: rgba(48, 109, 117, 0.72);
+  color: inherit;
+  font-size: 0.8em;
+}
+.dateInputs{
+
+}
+button{
+  border-style: none;
+  background-color: rgb(201, 219, 49);
+  font: inherit;
+  color: inherit;
+  margin: 1%;
+  border-radius: 13px;
+}
+#homeBtn{
+  font-size: 0.5em;
+  position: absolute;
+  top: 15%;
+}
