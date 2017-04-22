@@ -55,7 +55,7 @@ function registerCustomer() {
   console.log(nameInn+tlfInn+emailInn+accountInn+dateInn+storageTypeInn);
   //adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
-  customers.push(addedCustomer);
+  customers.push(addedCustomer);  
 
 }
 function showPage(evt) {
