@@ -1,5 +1,10 @@
 {
-  "name"    : "your-app",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+  "name": "your-app",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "rxdb": "^3.0.8",
+    "rxjs": "^5.3.0"
+  }
 }
