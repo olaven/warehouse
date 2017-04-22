@@ -1,7 +1,8 @@
 
 var pages = ["home", "register", "oversikt"];
 var storageTypes = ["Stor", "Liten", "Annet"];
-var costumer = function(name, tlf, email, accountNumber, regDate, storageType){
+var customers = [];
+var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
   this.tlf = tlf;
   this.email = email;
@@ -21,15 +22,46 @@ function pageLoaded() {
     for(i in pages){
      getId(pages[i] + "Btn").onclick = showPage;
     }
+    //registerPage
+    getId("registerCustomerBtn").onclick = registerCustomer;
 }
 function registerCustomer() {
+  var registerInputs = getClass("registerInputs");
+  var denied = false;
+  for(i in registerInputs){
+    if (registerInputs[i].value === "" || registerInputs.value === "dd.mm.åååå") {
+      //styling red to signalize illegal input
+      registerInputs[i].style.borderStyle = "solid";
+      registerInputs[i].style.borderColor = "rgb(180, 40, 48)";
+      registerInputs[i].style.backgroundColor = "rgb(180, 40, 48)";
+      let now = registerInputs[i];
+      setTimeout(function(evt){ //resetting red bgcolor after user has spotted it
+        now.style.backgroundColor = "rgba(48, 109, 117, 0.72)";
+      }, 1000);
+      denied = true;
+    }
+  }
+  if(denied){
+    return;
+  }
+
+  var nameInn = getId("nameInn").value;
+  var tlfInn = getId("tlfInn").value;
+  var emailInn = getId("emailInn").value;
+  var accountInn = getId("accountInn").value;
+  var dateInn = getId("dateInn").value;
+  var storageTypeInn = getId("storageTypeInn").value;
+
+  console.log(nameInn+tlfInn+emailInn+accountInn+dateInn+storageTypeInn);
+  //adding customer:
+  var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
+  customers.push(addedCustomer);
 
 }
 function showPage(evt) {
   hidePages();
   var k = evt.target.id.slice(0,evt.target.id.length - 3);
   k += "Page";
-  console.log(k);
   getId(k).style.visibility = "visible";
 }
 function hidePages(){
