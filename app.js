@@ -85,6 +85,32 @@ function searchFun(evt) {
 function updateOverview(arr) { //chhaning this to changable parameter. This->
   //way i can use it for seareching as well
   getId("overviewTableDiv").innerHTML = "";
+
+  //making "frame" of table:
+  var infoName = document.createElement("td");
+  var infoTlf = document.createElement("td");
+  var infoEmail = document.createElement("td");
+  var infoAccountNumber = document.createElement("td");
+  var infoDate = document.createElement("td");
+  var infoStorageType = document.createElement("td");
+
+  infoName.innerHTML = "Navn";
+  infoTlf.innerHTML = "Telefon";
+  infoEmail.innerHTML = "E-post";
+  infoAccountNumber.innerHTML = "Kontonummer";
+  infoDate.innerHTML = "Dato registrert";
+  infoStorageType.innerHTML = "Bodtype";
+
+  var infoTr = document.createElement("tr");
+  infoTr.id = "infoTr";
+  infoTr.appendChild(infoName)
+  infoTr.appendChild(infoTlf)
+  infoTr.appendChild(infoAccountNumber)
+  infoTr.appendChild(infoDate)
+  infoTr.appendChild(infoStorageType)
+
+  getId("overviewTableDiv").appendChild(infoTr);
+  getId("overviewTableDiv").innerHTML += "<br>";
   for(i in arr){//creating new <td> elements
     //need new <td>-tags for each "datapoint", ie. .name
     //adding info for one table row/customer
