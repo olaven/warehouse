@@ -21,7 +21,7 @@ function pageLoaded() {
   getId("homePage").style.visibility = "visible";
   //create html-stuff:
   makeList(storageTypes, "storageTypeInn");
-  updateOverview();
+  updateOverview(customers);
 
   //listeners
     for(i in pages){
@@ -31,6 +31,9 @@ function pageLoaded() {
     getId("registerCustomerBtn").onclick = registerCustomer;
     //overviewPage
     getId("searchBtn").onclick = searchFun;
+    getId("viewAllBtn").onclick = function(){
+      updateOverview(customers);
+    }
 }
 function registerCustomer() {
   var registerInputs = getClass("registerInputs");
@@ -59,24 +62,30 @@ function registerCustomer() {
   var dateInn = getId("dateInn").value;
   var storageTypeInn = getId("storageTypeInn").value;
 
-  console.log(nameInn+tlfInn+emailInn+accountInn+dateInn+storageTypeInn);
-  //adding customer:
+  //actually adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
   customers.push(addedCustomer);
-  updateOverview();
+  updateOverview(customers);
 }
 function searchFun(evt) {
   var searchTerm = getId("searchInn").value;
+  var hits = [];
+  var anyHits = false;
   for(i in customers){
     //if searchterm matches the first letters in current customer
     if(searchTerm.toLowerCase() === customers[i].name.toLowerCase()){
-      console.log(customers[i]);
+      hits.push(customers[i]);
+      anyHits = true;
     }
   }
+  if(anyHits){
+    updateOverview(hits);
+  }
 }
-function updateOverview() {
+function updateOverview(arr) { //chhaning this to changable parameter. This->
+  //way i can use it for seareching as well
   getId("overviewTableDiv").innerHTML = "";
-  for(i in customers){//creating new <td> elements
+  for(i in arr){//creating new <td> elements
     //need new <td>-tags for each "datapoint", ie. .name
     //adding info for one table row/customer
     var nameTd = document.createElement("td");
@@ -85,18 +94,18 @@ function updateOverview() {
     var accountNumberTd = document.createElement("td");
     var dateTd = document.createElement("td");
     var storageTypeTd = document.createElement("td");
-    nameTd.innerHTML = customers[i].name;
-    tlfTd.innerHTML = customers[i].tlf;
-    emailTd.innerHTML = customers[i].email;
-    accountNumberTd.innerHTML = customers[i].accountNumber;
-    dateTd.innerHTML = customers[i].date;
-    storageTypeTd.innerHTML = customers[i].storageType;
-    nameTd.id = customers[i].name;
-    tlfTd.id = customers[i].tlf;
-    emailTd.id = customers[i].email;
-    accountNumberTd.id = customers[i].accountNumber;
-    dateTd.id = customers[i].date;
-    storageTypeTd.id = customers[i].storageType;
+    nameTd.innerHTML = arr[i].name;
+    tlfTd.innerHTML = arr[i].tlf;
+    emailTd.innerHTML = arr[i].email;
+    accountNumberTd.innerHTML = arr[i].accountNumber;
+    dateTd.innerHTML = arr[i].date;
+    storageTypeTd.innerHTML = arr[i].storageType;
+    nameTd.id = arr[i].name;
+    tlfTd.id = arr[i].tlf;
+    emailTd.id = arr[i].email;
+    accountNumberTd.id = arr[i].accountNumber;
+    dateTd.id = arr[i].date;
+    storageTypeTd.id = arr[i].storageType;
 
     //Wrap customer up in one tr + appending of all td's
     var newTr = document.createElement("tr");
