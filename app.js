@@ -4,8 +4,8 @@ var storageTypes = ["Stor", "Liten", "Annet"];
 var customers = [];
 customers.push({name:"testmann", tlf:"909090", email:"testmail@test.no",
 date:"date", storageType:"small"});
-customers.push({name:"guro", tlf:"kosevenn", email:"vakreste@vannlilje.no",
-date:"date", storageType:"big"});
+customers.push({name:"olaven", tlf:"itsame999", email:"olaven@learning.com",
+date:"23.12.2023", storageType:"big"});
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
   this.tlf = tlf;
