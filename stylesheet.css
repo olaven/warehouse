@@ -49,3 +49,9 @@ button{
   position: absolute;
   top: 15%;
 }
+#overviewTableDiv{
+  border-style: solid; 
+  font-family: monospace;
+  margin-left: 50% auto;
+  margin-right: 50% auto;
+}
