@@ -24,6 +24,9 @@ body{
 .placedCenter{
   text-align: center;
 }
+.inlineBlock{
+  display: inline-block;
+}
 .headers{
   text-decoration: underline;
 }
@@ -32,9 +35,10 @@ input, select{
   background-color: rgba(48, 109, 117, 0.72);
   color: inherit;
   font-size: 0.8em;
+  width: 300px;
 }
 .dateInputs{
-
+  /*find out how to style this*/
 }
 button{
   border-style: none;

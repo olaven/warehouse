@@ -1,11 +1,9 @@
 
 var pages = ["home", "register", "overview"];
 var storageTypes = ["Stor", "Liten", "Annet"];
+
 var customers = [];
-customers.push({name:"testmann", tlf:"909090", email:"testmail@test.no",
-date:"date", storageType:"small"});
-customers.push({name:"olaven", tlf:"itsame999", email:"olaven@learning.com",
-date:"23.12.2023", storageType:"big"});
+
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
   this.tlf = tlf;
@@ -17,6 +15,7 @@ var customer = function(name, tlf, email, accountNumber, regDate, storageType){
 
 window.onload = pageLoaded;
 function pageLoaded() {
+
   //show homepage
   getId("homePage").style.visibility = "visible";
   //create html-stuff:
@@ -55,11 +54,16 @@ function registerCustomer() {
     return;
   }
 
+  //converting datestring from html calendar to a js date object
+  var d = getId("dateInn").value;
+  var dateObj = new Date(d[0]+d[1]+d[2]+d[3], d[5]+d[6], d[7]+d[8]);
+  //--------------------------------------------
+
   var nameInn = getId("nameInn").value;
   var tlfInn = getId("tlfInn").value;
   var emailInn = getId("emailInn").value;
   var accountInn = getId("accountInn").value;
-  var dateInn = getId("dateInn").value;
+  var dateInn = dateObj;
   var storageTypeInn = getId("storageTypeInn").value;
 
   //actually adding customer:
@@ -82,7 +86,7 @@ function searchFun(evt) {
     updateOverview(hits);
   }
 }
-function updateOverview(arr) { //chhaning this to changable parameter. This->
+function updateOverview(arr) { //changing this to changable parameter. This->
   //way i can use it for seareching as well
   getId("overviewTableDiv").innerHTML = "";
 
@@ -124,7 +128,7 @@ function updateOverview(arr) { //chhaning this to changable parameter. This->
     tlfTd.innerHTML = arr[i].tlf;
     emailTd.innerHTML = arr[i].email;
     accountNumberTd.innerHTML = arr[i].accountNumber;
-    dateTd.innerHTML = arr[i].date;
+    dateTd.innerHTML = arr[i].regDate; 
     storageTypeTd.innerHTML = arr[i].storageType;
     nameTd.id = arr[i].name;
     tlfTd.id = arr[i].tlf;
@@ -165,6 +169,7 @@ function hidePages(){
     }
   }
 }
+
 //div praktiske greier, ikke programspesifikt
 function makeList(arr, selectId) {
   for(i in arr){

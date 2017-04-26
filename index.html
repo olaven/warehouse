@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Warehouse Software</title>
-    <script type="text/javascript" src="app.js"></script>
 
-    </script>
+    <script src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head>
   <storagey>
@@ -18,19 +17,30 @@
         <button type="button" class="buttons" id="registerBtn">Registere ny kunde</button>
         <button type="button" class="buttons" id="overviewBtn">Se oversikt</button>
       </div>
-
       <div class="pages" id="registerPage">
-        <h3>regisrter en ny leietaker:</h3> <br>
-        Navn: <input type="text" id="nameInn" class="registerInputs">
-        Telefonnummer: <input type="number" id="tlfInn" class="registerInputs">
-        E-post: <input type="text" id="emailInn" class="registerInputs">
-        Kontonummer: <input type="number" id="accountInn" class="registerInputs">
-        Registeringsdato: <input type="date" id="dateInn" class="dateInputs registerInputs">
-        storagetype: <select id="storageTypeInn" class="registerInputs"></select>
+        <h3>Registrer en ny leietaker:</h3> <br>
+        <div id="entireRegisterField" class="inlineBlock container">
+          <div id="registerInputText" class="inlineBlock"  width="50%">
+            Navn:<br>
+            Telefonnummer:<br>
+            E-post:<br>
+            Kontonummer:<br>
+            Registeringsdato:<br>
+            storagetype:<br>
+          </div>
+          <div id="registerInputFields" class="inlineBlock" width="50%">
+            <input type="text" id="nameInn" class="registerInputs "><br>
+             <input type="number" id="tlfInn" class="registerInputs "><br>
+             <input type="text" id="emailInn" class="registerInputs "><br>
+            <input type="number" id="accountInn" class="registerInputs "><br>
+            <input type="date" id="dateInn" class="dateInputs registerInputs "><br>
+            <select id="storageTypeInn" class="registerInputs " ></select>
+          </div>
+        </div>
+         <br>
         <br>
         <button type="button" id="registerCustomerBtn">Registrer Kunde</button>
       </div>
-
       <div class="pages placedCenter" id="overviewPage">
         <input type="text" id="searchInn" class="inputs placedCenter" placeholder="Søkeord">
         <button type="button" id="searchBtn">Søk</button>

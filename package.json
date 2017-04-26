@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "main": "main.js",
   "dependencies": {
+    "alasql": "^0.3.9",
     "babel-polyfill": "^6.23.0",
+    "pouchdb": "^6.2.0",
     "rxdb": "^3.0.8",
     "rxjs": "^5.3.0"
   }
