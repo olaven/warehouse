@@ -2,9 +2,10 @@
 var pages = ["home", "register", "overview"];
 var storageTypes = ["Stor", "Liten", "Annet"];
 
-var customers = [];
+//arr to hold objects
+var customers = [];//before implementing json solution
 
-
+//Constructor used to create a new entry in custoenrs
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
   this.tlf = tlf;
