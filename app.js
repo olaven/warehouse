@@ -4,6 +4,7 @@ var storageTypes = ["Stor", "Liten", "Annet"];
 
 var customers = [];
 
+
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
   this.tlf = tlf;
@@ -128,7 +129,7 @@ function updateOverview(arr) { //changing this to changable parameter. This->
     tlfTd.innerHTML = arr[i].tlf;
     emailTd.innerHTML = arr[i].email;
     accountNumberTd.innerHTML = arr[i].accountNumber;
-    dateTd.innerHTML = arr[i].regDate; 
+    dateTd.innerHTML = arr[i].regDate;
     storageTypeTd.innerHTML = arr[i].storageType;
     nameTd.id = arr[i].name;
     tlfTd.id = arr[i].tlf;
