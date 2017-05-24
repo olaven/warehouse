@@ -22,7 +22,7 @@ function pageLoaded() {
   getId("homePage").style.visibility = "visible";
   //create html-stuff:
   makeList(storageTypes, "storageTypeInn");
-  updateOverview(customers);
+  updateOverview(customers, "overviewTableDiv"); ;
 
   //listeners
     for(i in pages){
@@ -33,7 +33,7 @@ function pageLoaded() {
     //overviewPage
     getId("searchBtn").onclick = searchFun;
     getId("viewAllBtn").onclick = function(){
-      updateOverview(customers);
+      updateOverview(customers, "overviewTableDiv"); ;
     }
 }
 function registerCustomer() {
@@ -71,7 +71,7 @@ function registerCustomer() {
   //actually adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
   customers.push(addedCustomer);
-  updateOverview(customers);
+  updateOverview(customers, "overviewTableDiv"); ;
 }
 function searchFun(evt) {
   var searchTerm = getId("searchInn").value;
@@ -85,9 +85,28 @@ function searchFun(evt) {
     }
   }
   if(anyHits){
-    updateOverview(hits);
+    updateOverview(hits, "overviewTableDiv");
   }
 }
+function updateOverview(arr, fieldId) {//expects an array where all indexes
+  //contains structural identical objects
+  //arr[i] = {node1 = "node1", node2 = "node2"} and similars.
+  //fieldId is a html-element (not table) where table should be
+  //created
+  document.getElementById(fieldId).innerHTML = "";//clearing area
+  var newTable = document.createElement("table");
+  for(i in arr){
+    var newTr = document.createElement("tr");
+    for(x in arr[i]){
+      var newTd = document.createElement("td");
+      newTd.innerHTML = arr[i][x];
+      newTr.appendChild(newTd);
+    }
+    newTable.appendChild(newTr);
+  }
+  document.getElementById(fieldId).appendChild(newTable);
+}
+/*//REPLACING THIS WITH AN OPTIMIZED VERSION
 function updateOverview(arr) { //changing this to changable parameter. This->
   //way i can use it for seareching as well
   getId("overviewTableDiv").innerHTML = "";
@@ -156,7 +175,7 @@ function updateOverview(arr) { //changing this to changable parameter. This->
     getId("overviewTableDiv").appendChild(newTable);
 
   }
-}
+} */
 function showPage(evt) {
   hidePages();
   var k = evt.target.id.slice(0,evt.target.id.length - 3);
