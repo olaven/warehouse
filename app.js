@@ -82,8 +82,10 @@ function registerCustomer() {
   customers.push(addedCustomer);
   //communicate to user that comstumer was registred
   for(i in registerInputs){//clearing field
-    registerInputs[i].innerHTML = "";
-    registerInputs[i].value = "";
+    if(registerInputs[i].tagName !== "SELECT"){
+      registerInputs[i].innerHTML = "";
+      registerInputs[i].value = "";
+    }
   }
   //making registerCustomerBtn green to indicate success
   getId("registerCustomerBtn").style.backgroundColor = "rgb(51, 242, 104)";
