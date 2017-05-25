@@ -2,9 +2,8 @@
 var pages = ["home", "register", "overview"];
 var storageTypes = ["Stor", "Liten", "Annet"];
 
-//arr to hold objects
-var customers = [];//before implementing json solution
-
+var customersString;
+var customers;
 //Constructor used to create a new entry in custoenrs
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.name = name;
@@ -13,11 +12,19 @@ var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.accountNumber = accountNumber;
   this.regDate = regDate;
   this.storageType = storageType;
-}//TO BE USED LATER, NEED TO FIGURE OUT HOW TO STORE DATA
+}
 
 window.onload = pageLoaded;
 function pageLoaded() {
-
+  //Are customers registred in localStorage?
+  if(!localStorage.getItem("customerStore")){
+    populateStorage();
+  }
+  else {
+    //customers JSON-object as string. Converted to object below
+    customersString = localStorage.getItem("customerStore");
+    customers = JSON.parse(customersString);
+  }
   //show homepage
   getId("homePage").style.visibility = "visible";
   //create html-stuff:
@@ -35,6 +42,9 @@ function pageLoaded() {
     getId("viewAllBtn").onclick = function(){
       updateOverview(customers, "overviewTableDiv"); ;
     }
+}
+function populateStorage() {//when no costumers are saved
+  localStorage.setItem("customerStore", ""); //assigned as no customers
 }
 function registerCustomer() {
   var registerInputs = getClass("registerInputs");
@@ -71,7 +81,12 @@ function registerCustomer() {
   //actually adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
   customers.push(addedCustomer);
-  updateOverview(customers, "overviewTableDiv"); ;
+  updateOverview(customers, "overviewTableDiv");
+  updateLocalStorage("customerStore", customers)
+}
+function updateLocalStorage(key, object) {
+  var objectString = JSON.stringify(object)
+  localStorage.setItem(key, objectString);
 }
 function searchFun(evt) {
   var searchTerm = getId("searchInn").value;
