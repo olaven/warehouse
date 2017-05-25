@@ -2,7 +2,6 @@
 var pages = ["home", "register", "overview"];
 var storageTypes = ["Stor", "Liten", "Annet"];
 
-var customersString;
 var customers;
 //Constructor used to create a new entry in custoenrs
 var customer = function(name, tlf, email, accountNumber, regDate, storageType){
@@ -17,13 +16,13 @@ var customer = function(name, tlf, email, accountNumber, regDate, storageType){
 window.onload = pageLoaded;
 function pageLoaded() {
   //Are customers registred in localStorage?
-  if(!localStorage.getItem("customerStore")){
+  if(localStorage.getItem("customerStore") === null || undefined){
     populateStorage();
   }
   else {
     //customers JSON-object as string. Converted to object below
-    customersString = localStorage.getItem("customerStore");
-    customers = JSON.parse(customersString);
+    var str = localStorage.getItem("customerStore");
+    customers = JSON.parse(str);
   }
   //show homepage
   getId("homePage").style.visibility = "visible";
@@ -44,7 +43,7 @@ function pageLoaded() {
     }
 }
 function populateStorage() {//when no costumers are saved
-  localStorage.setItem("customerStore", ""); //assigned as no customers
+  localStorage.setItem("customerStore", "[]"); //assigned as no customers
 }
 function registerCustomer() {
   var registerInputs = getClass("registerInputs");
@@ -80,6 +79,7 @@ function registerCustomer() {
 
   //actually adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
+  //BUG custromers not defined
   customers.push(addedCustomer);
   updateOverview(customers, "overviewTableDiv");
   updateLocalStorage("customerStore", customers)
