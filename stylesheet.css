@@ -17,7 +17,7 @@ body{
   border-right-style: solid;
   border-right-color: rgb(205, 72, 72);
   border-right-width: 0.2em;
-  border-bottom-style: solid;
+  border-bottom-style: none;
   border-bottom-color: rgb(205, 72, 72);
   border-bottom-width: 0.6em;
 }
@@ -31,14 +31,18 @@ body{
   text-decoration: underline;
 }
 input, select{
-  border: none;
-  background-color: rgba(48, 109, 117, 0.72);
+  border-style: solid;
+  background-color: rgb(149, 227, 237);
+  border-color: rgba(48, 109, 117, 0.72);
   color: inherit;
   font-size: 0.8em;
   width: 300px;
 }
 .dateInputs{
   /*find out how to style this*/
+}
+.fullWidth{
+  width: 100%; 
 }
 button{
   border-style: none;
@@ -57,6 +61,9 @@ button{
   font-family: monospace;
   margin-left: 50% auto;
   margin-right: 50% auto;
+}
+.registerInputs{
+
 }
 td{
   position: relative;

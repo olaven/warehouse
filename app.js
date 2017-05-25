@@ -1,5 +1,5 @@
 
-var pages = ["home", "register", "overview"];
+var pages = ["home", "register", "overview", "settings"];
 var storageTypes = ["Stor", "Liten", "Annet"];
 
 var customers;
@@ -11,13 +11,13 @@ var customer = function(name, tlf, email, accountNumber, regDate, storageType){
   this.accountNumber = accountNumber;
   this.regDate = regDate;
   this.storageType = storageType;
+  this.payed = false;
 }
 
 window.onload = pageLoaded;
 function pageLoaded() {
   //is customerStore registred in localStorage?
   if(localStorage.getItem("customerStore") === null || localStorage.getItem("customerStore") === undefined){
-    console.log("customerStore ikke esiterer, populating now");
     populateStorage();
   }
   //customers JSON-object as string. Converted to object below
@@ -56,6 +56,7 @@ function registerCustomer() {
       let now = registerInputs[i];
       setTimeout(function(evt){ //resetting red bgcolor after user has spotted it
         now.style.backgroundColor = "rgba(48, 109, 117, 0.72)";
+        //now.style.borderStyle = "none";
       }, 1000);
       denied = true;
     }
@@ -79,6 +80,19 @@ function registerCustomer() {
   //actually adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
   customers.push(addedCustomer);
+  //communicate to user that comstumer was registred
+  for(i in registerInputs){//clearing field
+    registerInputs[i].innerHTML = "";
+    registerInputs[i].value = "";
+  }
+  //making registerCustomerBtn green to indicate success
+  getId("registerCustomerBtn").style.backgroundColor = "rgb(51, 242, 104)";
+  getId("registerCustomerBtn").innerHTML = "Success";
+  setTimeout(function(){
+    getId("registerCustomerBtn").style.backgroundColor = "rgb(201, 219, 49)";
+    getId("registerCustomerBtn").innerHTML = "Registrer kunde";
+  }, 1000)
+  //update localStorage/JSON and overviewPage
   updateOverview(customers, "overviewTableDiv");
   updateLocalStorage("customerStore", customers)
 }
@@ -101,13 +115,15 @@ function searchFun(evt) {
     updateOverview(hits, "overviewTableDiv");
   }
 }
-function updateOverview(arr, fieldId) {//expects an array where all indexes
+function updateOverview(arr, fieldId) {
+  //expects an array where all indexes
   //contains structural identical objects
   //arr[i] = {node1 = "node1", node2 = "node2"} and similars.
   //fieldId is a html-element (not table) where table should be
   //created
   document.getElementById(fieldId).innerHTML = "";//clearing area
   var newTable = document.createElement("table");
+  newTable.className = "fullWidth";
   for(i in arr){
     var newTr = document.createElement("tr");
     for(x in arr[i]){
