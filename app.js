@@ -15,15 +15,14 @@ var customer = function(name, tlf, email, accountNumber, regDate, storageType){
 
 window.onload = pageLoaded;
 function pageLoaded() {
-  //Are customers registred in localStorage?
-  if(localStorage.getItem("customerStore") === null || undefined){
+  //is customerStore registred in localStorage?
+  if(localStorage.getItem("customerStore") === null || localStorage.getItem("customerStore") === undefined){
+    console.log("customerStore ikke esiterer, populating now");
     populateStorage();
   }
-  else {
-    //customers JSON-object as string. Converted to object below
-    var str = localStorage.getItem("customerStore");
-    customers = JSON.parse(str);
-  }
+  //customers JSON-object as string. Converted to object below
+  var str = localStorage.getItem("customerStore");
+  customers = JSON.parse(str);
   //show homepage
   getId("homePage").style.visibility = "visible";
   //create html-stuff:
@@ -79,7 +78,6 @@ function registerCustomer() {
 
   //actually adding customer:
   var addedCustomer = new customer(nameInn, tlfInn, emailInn, accountInn, dateInn, storageTypeInn);
-  //BUG custromers not defined
   customers.push(addedCustomer);
   updateOverview(customers, "overviewTableDiv");
   updateLocalStorage("customerStore", customers)
