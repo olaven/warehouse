@@ -1,5 +1,6 @@
 
-var pages = ["home", "register", "overview", "settings"];
+var pages = ["home", "register", "overview", "settings",
+ "deleteCustomer", "colorSettings"];
 var storageTypes = ["Stor", "Liten", "Annet"];
 
 var customers;
@@ -36,9 +37,15 @@ function pageLoaded() {
     //registerPage
     getId("registerCustomerBtn").onclick = registerCustomer;
     //overviewPage
-    getId("searchBtn").onclick = searchFun;
+    getId("searchBtn").onclick = function(){
+      searchFun("searchInn", "overviewTableDiv");
+    }
     getId("viewAllBtn").onclick = function(){
-      updateOverview(customers, "overviewTableDiv"); ;
+      updateOverview(customers, "overviewTableDiv");
+    }
+    //deleteCustomerPage
+    getId("searchDeleteCustomerBtn").onclick = function(){
+      searchFun("searchInnDeleteCustomer", "deleteCustomerTableDiv");
     }
 }
 function populateStorage() {//when no costumers are saved
@@ -102,8 +109,8 @@ function updateLocalStorage(key, object) {
   var objectString = JSON.stringify(object)
   localStorage.setItem(key, objectString);
 }
-function searchFun(evt) {
-  var searchTerm = getId("searchInn").value;
+function searchFun(termKilde, tabellId, evt) {
+  var searchTerm = getId(termKilde).value;
   var hits = [];
   var anyHits = false;
   for(i in customers){
@@ -114,7 +121,7 @@ function searchFun(evt) {
     }
   }
   if(anyHits){
-    updateOverview(hits, "overviewTableDiv");
+    updateOverview(hits, tabellId);
   }
 }
 function updateOverview(arr, fieldId) {
