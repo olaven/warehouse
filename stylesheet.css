@@ -42,7 +42,7 @@ input, select{
   /*find out how to style this*/
 }
 .fullWidth{
-  width: 100%; 
+  width: 100%;
 }
 button{
   border-style: none;
@@ -71,4 +71,7 @@ td{
   border-right-style: solid;
   border-color: rgb(51, 41, 136);
   table-layout: fixed;
+}
+#deleteCustomerTableDiv > table >tr:hover{
+  background-color: red;
 }
