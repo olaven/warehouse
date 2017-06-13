@@ -46,7 +46,39 @@ function pageLoaded() {
     //deleteCustomerPage
     getId("searchDeleteCustomerBtn").onclick = function(){
       searchFun("searchInnDeleteCustomer", "deleteCustomerTableDiv");
+      //adding listener for deletion-click
+      getId("deleteCustomerTableDiv").childNodes[0].onclick = deleteCustomerFun;
     }
+}
+function deleteCustomerFun(evt) {
+  var deleteTr = evt.target.parentNode; //getting the <tr> tag. Can extract
+  //information from that later on width .childNodes[0] etc.
+
+    /*I have chosen to only check specific parts of the customer information.
+    1: Converting datatypes can and will be messy
+    2: Updating this method will be difficult if/when more properties are addedCustomer
+    3: My opinion on this would not be the same if this software was going to be used
+    by a big audience
+    4: If I have any reason to do so, I will do my best to go with a better approach here
+    at another date*/
+for(i in customers){
+    if(customers[i].name === deleteTr.childNodes[0].innerHTML){
+      if(customers[i].tlf === deleteTr.childNodes[1].innerHTML){
+        if(customers[i].email === deleteTr.childNodes[2].innerHTML){
+          if(customers[i].accountNumber === deleteTr.childNodes[3].innerHTML){
+            if(customers[i].regDate === deleteTr.childNodes[4].innerHTML){
+              if (customers[i].storageType === deleteTr.childNodes[5].innerHTML) {
+                customers.splice(i, 1) //removes customer from customers
+                localStorage.setItem("customerStore", JSON.stringify(customers));
+                updateOverview(customers, "overviewTableDiv");
+                deleteTr.style.backgroundColor = "rgb(108, 17, 39)"; 
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 function populateStorage() {//when no costumers are saved
   localStorage.setItem("customerStore", "[]"); //assigned as no customers
