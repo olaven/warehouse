@@ -17,6 +17,7 @@
         <button type="button" class="buttons" id="registerBtn">Registere ny kunde</button>
         <button type="button" class="buttons" id="overviewBtn">Se oversikt</button>
         <button type="button" class="buttons" id="settingsBtn">Instillinger</button>
+        <button type="button" class="buttons" id="paymentBtn">Betaling</button>
       </div>
       <div class="pages" id="registerPage">
         <h3>Registrer en ny leietaker:</h3> <br>
@@ -87,7 +88,25 @@
           Colorsettings are coming soon!
         </div>
       </div>
+      <div class="pages placedCenter" id="paymentPage">
+        <h3>Registrer en betaling</h3>
+        <input type="text" id="payMentSearchInn" class="inputs placedCenter" placeholder="Hvem har betalt?">
+        <button type="button" id="paymentSearchBtn">Find</button>
+        <table class="fullWidth oversiktstabeller">
+          <tr>
+            <td>Navn</td>
+            <td>Telefonnummer</td>
+            <td>E-post</td>
+            <td>kontonummer</td>
+            <td>Registreringsdato</td>
+            <td>Bodtype</td>
+            <td>Har betalt</td>
+          </tr>
+        </table>
+        <table id="paymentTable">
 
+        </table>
+      </div>
     </div>
   </storagey>
 </html>
